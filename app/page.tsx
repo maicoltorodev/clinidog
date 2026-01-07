@@ -39,6 +39,26 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
+// Helper function para smooth scroll a secciones
+const scrollToSection = (sectionId: string, headerOffset = 0) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
+// Constantes
+const PHONE_PRIMARY = "573123015259"
+const PHONE_SECONDARY = "573114926051"
+const PHONE_PRIMARY_DISPLAY = "312 301 5259"
+const PHONE_SECONDARY_DISPLAY = "311 492 6051"
+const MAPS_URL = "https://maps.app.goo.gl/fv3ihJzEAqBb7PZBA"
+
 export default function HomePage() {
   const observerRef = useRef<IntersectionObserver | null>(null)
   const [currentReview, setCurrentReview] = useState(0)
@@ -213,56 +233,25 @@ export default function HomePage() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
-              <a
-                href="#servicios"
-                onClick={(e) => {
-                  e.preventDefault()
-                  const element = document.getElementById('servicios')
-                  element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }}
-                className="px-5 py-2.5 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all duration-200 relative group"
-              >
-                {"Servicios"}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
-              <a 
-                href="#nosotros"
-                onClick={(e) => {
-                  e.preventDefault()
-                  const element = document.getElementById('nosotros')
-                  element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }}
-                className="px-5 py-2.5 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all duration-200 relative group"
-              >
-                {"Nosotros"}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
-              <a 
-                href="#horarios"
-                onClick={(e) => {
-                  e.preventDefault()
-                  const element = document.getElementById('horarios')
-                  element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }}
-                className="px-5 py-2.5 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all duration-200 relative group"
-              >
-                {"Horarios"}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
+              {['servicios', 'nosotros', 'horarios'].map((section) => (
+                <a
+                  key={section}
+                  href={`#${section}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollToSection(section)
+                  }}
+                  className="px-5 py-2.5 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all duration-200 relative group"
+                >
+                  {section === 'servicios' ? 'Servicios' : section === 'nosotros' ? 'Nosotros' : 'Horarios'}
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
+                </a>
+              ))}
               <a 
                 href="#contacto"
                 onClick={(e) => {
                   e.preventDefault()
-                  const element = document.getElementById('contacto')
-                  if (element) {
-                    const headerOffset = 100
-                    const elementPosition = element.getBoundingClientRect().top
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: 'smooth'
-                    })
-                  }
+                  scrollToSection('contacto', 100)
                 }}
                 className="px-5 py-2.5 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all duration-200 relative group"
               >
@@ -282,16 +271,7 @@ export default function HomePage() {
                   href="#contacto"
                   onClick={(e) => {
                     e.preventDefault()
-                    const element = document.getElementById('contacto')
-                    if (element) {
-                      const headerOffset = 100
-                      const elementPosition = element.getBoundingClientRect().top
-                      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                      })
-                    }
+                    scrollToSection('contacto', 100)
                   }}
                 >
                   Contacto
@@ -320,42 +300,25 @@ export default function HomePage() {
             }`}
           >
             <nav className="py-4 space-y-2 border-t">
-              <a
-                href="#servicios"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
-              >
-                {"Servicios"}
-              </a>
-              <a
-                href="#nosotros"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
-              >
-                {"Nosotros"}
-              </a>
-              <a
-                href="#horarios"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
-              >
-                {"Horarios"}
-              </a>
+              {['servicios', 'nosotros', 'horarios'].map((section) => (
+                <a
+                  key={section}
+                  href={`#${section}`}
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    scrollToSection(section)
+                  }}
+                  className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
+                >
+                  {section === 'servicios' ? 'Servicios' : section === 'nosotros' ? 'Nosotros' : 'Horarios'}
+                </a>
+              ))}
               <a
                 href="#contacto"
                 onClick={(e) => {
                   e.preventDefault()
                   setMobileMenuOpen(false)
-                  const element = document.getElementById('contacto')
-                  if (element) {
-                    const headerOffset = 100
-                    const elementPosition = element.getBoundingClientRect().top
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: 'smooth'
-                    })
-                  }
+                  scrollToSection('contacto', 100)
                 }}
                 className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
               >
@@ -371,16 +334,7 @@ export default function HomePage() {
                     onClick={(e) => {
                       e.preventDefault()
                       setMobileMenuOpen(false)
-                      const element = document.getElementById('contacto')
-                      if (element) {
-                        const headerOffset = 100
-                        const elementPosition = element.getBoundingClientRect().top
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-                        window.scrollTo({
-                          top: offsetPosition,
-                          behavior: 'smooth'
-                        })
-                      }
+                      scrollToSection('contacto', 100)
                     }}
                   >
                     Contacto
@@ -416,9 +370,9 @@ export default function HomePage() {
                 className="bg-accent hover:bg-accent/90 text-accent-foreground hover:scale-105 transition-transform"
                 asChild
               >
-                <a href="https://wa.me/573123015259" target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/${PHONE_PRIMARY}`} target="_blank" rel="noopener noreferrer">
                   <Phone className="mr-2 h-5 w-5" />
-                  312 301 5259
+                  {PHONE_PRIMARY_DISPLAY}
                 </a>
               </Button>
               <Button
@@ -427,9 +381,9 @@ export default function HomePage() {
                 className="border-primary text-primary hover:bg-primary/10 bg-transparent hover:scale-105 transition-transform"
                 asChild
               >
-                <a href="https://wa.me/573114926051" target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/${PHONE_SECONDARY}`} target="_blank" rel="noopener noreferrer">
                   <Phone className="mr-2 h-5 w-5" />
-                  311 492 6051
+                  {PHONE_SECONDARY_DISPLAY}
                 </a>
               </Button>
             </div>
@@ -739,7 +693,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   <a
-                    href="https://maps.app.goo.gl/fv3ihJzEAqBb7PZBA"
+                    href={MAPS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-medium transition-colors text-sm"
@@ -762,7 +716,7 @@ export default function HomePage() {
                   />
                 </div>
                 <a
-                  href="https://maps.app.goo.gl/fv3ihJzEAqBb7PZBA"
+                  href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="md:hidden mt-4 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-medium transition-colors text-sm"
@@ -790,41 +744,29 @@ export default function HomePage() {
               </div>
               
               <div className="space-y-4">
-                <a 
-                  href="https://wa.me/573123015259" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 border border-primary/10 transition-all group/item"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover/item:bg-primary/20 transition-colors">
-                      <WhatsAppIcon className="h-6 w-6 text-primary" />
+                {[
+                  { phone: PHONE_PRIMARY, display: PHONE_PRIMARY_DISPLAY, label: "Línea principal" },
+                  { phone: PHONE_SECONDARY, display: PHONE_SECONDARY_DISPLAY, label: "Línea alternativa" }
+                ].map((item) => (
+                  <a 
+                    key={item.phone}
+                    href={`https://wa.me/${item.phone}`}
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 border border-primary/10 transition-all group/item"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover/item:bg-primary/20 transition-colors">
+                        <WhatsAppIcon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <span className="block font-bold text-xl text-foreground">{item.display}</span>
+                        <span className="block text-sm text-muted-foreground">{item.label}</span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="block font-bold text-xl text-foreground">{"312 301 5259"}</span>
-                      <span className="block text-sm text-muted-foreground">{"Línea principal"}</span>
-                    </div>
-                  </div>
-                  <span className="px-3 py-1 rounded-full bg-accent/20 text-xs font-medium text-accent">{"WhatsApp"}</span>
-                </a>
-                
-                <a 
-                  href="https://wa.me/573114926051" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 border border-primary/10 transition-all group/item"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover/item:bg-primary/20 transition-colors">
-                      <WhatsAppIcon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <span className="block font-bold text-xl text-foreground">{"311 492 6051"}</span>
-                      <span className="block text-sm text-muted-foreground">{"Línea alternativa"}</span>
-                    </div>
-                  </div>
-                  <span className="px-3 py-1 rounded-full bg-accent/20 text-xs font-medium text-accent">{"WhatsApp"}</span>
-                </a>
+                    <span className="px-3 py-1 rounded-full bg-accent/20 text-xs font-medium text-accent">{"WhatsApp"}</span>
+                  </a>
+                ))}
               </div>
               
               <div className="mt-6 pt-6 border-t border-border">
@@ -833,7 +775,7 @@ export default function HomePage() {
                   size="lg"
                   asChild
                 >
-                  <a href="https://wa.me/573123015259" target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/${PHONE_PRIMARY}`} target="_blank" rel="noopener noreferrer">
                     <Phone className="mr-2 h-5 w-5" />
                     Llamar Ahora
                   </a>
@@ -856,7 +798,7 @@ export default function HomePage() {
               <div className="space-y-6">
                 <div className="p-5 rounded-xl bg-muted/50 border border-border">
                   <a
-                    href="https://maps.app.goo.gl/fv3ihJzEAqBb7PZBA"
+                    href={MAPS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block group/item"
@@ -1145,7 +1087,7 @@ export default function HomePage() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="https://maps.app.goo.gl/fv3ihJzEAqBb7PZBA"
+                    href={MAPS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-start gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -1156,24 +1098,24 @@ export default function HomePage() {
                 </li>
                 <li>
                   <a
-                    href="https://wa.me/573114926051"
+                    href={`https://wa.me/${PHONE_SECONDARY}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Phone className="h-4 w-4" />
-                    <span>{"311 492 6051"}</span>
+                    <span>{PHONE_SECONDARY_DISPLAY}</span>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://wa.me/573123015259"
+                    href={`https://wa.me/${PHONE_PRIMARY}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Phone className="h-4 w-4" />
-                    <span>{"312 301 5259"}</span>
+                    <span>{PHONE_PRIMARY_DISPLAY}</span>
                   </a>
                 </li>
               </ul>

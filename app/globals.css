@@ -227,17 +227,14 @@
     /* Limitar el número de elementos animados simultáneamente - desactivar slide-in */
     .animate-in {
       animation: none !important;
+      /* Asegurar que los elementos sean visibles */
+      opacity: 1 !important;
     }
     
-    /* Solo permitir fade-in simple en móvil usando opacity */
+    /* Solo permitir fade-in simple en móvil usando opacity - pero mantener visible */
     .animate-in.fade-in {
-      animation: fade-in-mobile 0.4s ease-out !important;
-      opacity: 0;
-    }
-    
-    .animate-in.fade-in[style*="animation-delay"] {
-      animation: fade-in-mobile 0.4s ease-out !important;
-      opacity: 1;
+      animation: none !important;
+      opacity: 1 !important;
     }
     
     /* Desactivar animaciones de sombras en móvil - usar solo opacity */
@@ -265,11 +262,16 @@
       transform: none !important;
     }
     
-    /* Optimizar transiciones generales en móvil */
-    * {
+    /* Optimizar transiciones generales en móvil - solo para elementos específicos */
+    .hover-element,
+    .card-hover {
       transition-property: opacity !important;
       transition-duration: 0.2s !important;
       transition-timing-function: ease !important;
+    }
+    
+    /* Evitar will-change innecesario en móvil */
+    .hover-element {
       will-change: auto !important;
     }
     
@@ -286,15 +288,15 @@
     }
   }
   
-  /* Animación simple de fade-in para móvil usando solo opacity */
-  @keyframes fade-in-mobile {
+  /* Animación simple de fade-in para móvil usando solo opacity - no se usa actualmente */
+  /* @keyframes fade-in-mobile {
     from {
       opacity: 0;
     }
     to {
       opacity: 1;
     }
-  }
+  } */
 
   /* Gradientes modernos */
   .gradient-primary {
