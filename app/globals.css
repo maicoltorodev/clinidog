@@ -17,7 +17,7 @@
   --secondary-foreground: oklch(0.25 0.02 245);
   --muted: oklch(0.96 0.01 225);
   --muted-foreground: oklch(0.5 0.02 245);
-  --accent: oklch(0.48 0.22 335); /* Pink #e20470 from logo */
+  --accent: oklch(0.63 0.25 345); /* Pink #e20470 from logo */
   --accent-foreground: oklch(0.99 0.005 225);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0.005 225);
@@ -304,15 +304,23 @@
   }
 
   .gradient-accent {
-    background: linear-gradient(135deg, oklch(0.48 0.22 335) 0%, oklch(0.55 0.24 340) 100%);
+    background: linear-gradient(135deg, oklch(0.63 0.25 345) 0%, oklch(0.68 0.27 350) 100%);
+  }
+
+  /* Gradiente para títulos usando la nueva paleta de colores */
+  .gradient-title {
+    background: linear-gradient(90deg, oklch(0.62 0.13 230) 0%, oklch(0.62 0.13 230) 50%, oklch(0.63 0.25 345) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .gradient-mesh {
     background: 
       radial-gradient(at 0% 0%, oklch(0.62 0.13 230 / 0.1) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, oklch(0.48 0.22 335 / 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, oklch(0.63 0.25 345 / 0.1) 0px, transparent 50%),
       radial-gradient(at 100% 100%, oklch(0.68 0.15 240 / 0.05) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, oklch(0.48 0.22 335 / 0.05) 0px, transparent 50%);
+      radial-gradient(at 0% 100%, oklch(0.63 0.25 345 / 0.05) 0px, transparent 50%);
   }
 
   /* Glassmorphism effect */
@@ -391,7 +399,7 @@
     inset: 0;
     border-radius: 1rem;
     padding: 1px;
-    background: linear-gradient(135deg, oklch(0.62 0.13 230), oklch(0.48 0.22 335));
+    background: linear-gradient(135deg, oklch(0.62 0.13 230), oklch(0.63 0.25 345));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;

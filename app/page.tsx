@@ -181,11 +181,11 @@ export default function HomePage() {
         {
           threshold: [0.5],
           rootMargin: "-20% 0px -20% 0px",
-        },
-      )
+      },
+    )
 
-      const elements = document.querySelectorAll(".hover-element")
-      elements.forEach((el) => observerRef.current?.observe(el))
+    const elements = document.querySelectorAll(".hover-element")
+    elements.forEach((el) => observerRef.current?.observe(el))
     }
 
     // Defer observer setup para no bloquear el render inicial
@@ -224,12 +224,12 @@ export default function HomePage() {
                 />
               </div>
               <div>
-                <span className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent block">
+                <span className="text-xl md:text-2xl font-extrabold gradient-title block">
                   {"CLINIDOG"}
                 </span>
                 <span className="text-xs text-muted-foreground hidden sm:block">{"Veterinaria 24/7"}</span>
               </div>
-            </Link>
+          </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
@@ -260,7 +260,7 @@ export default function HomePage() {
               </a>
             </nav>
 
-            {/* CTA Button Desktop */}
+            {/* CTA Button Desktop - WhatsApp */}
             <div className="hidden lg:flex items-center gap-3">
               <Button 
                 size="lg"
@@ -268,13 +268,24 @@ export default function HomePage() {
                 asChild
               >
                 <a 
-                  href="#contacto"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    scrollToSection('contacto', 100)
-                  }}
+                  href={`https://wa.me/${PHONE_PRIMARY}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Contacto
+                  Llamar Ahora
+                </a>
+              </Button>
+            </div>
+
+            {/* CTA Button Mobile - Llamada directa */}
+            <div className="lg:hidden">
+              <Button 
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold px-6 py-5 text-base" 
+                asChild
+              >
+                <a href={`tel:+${PHONE_PRIMARY}`}>
+                  Llamar Ahora
                 </a>
               </Button>
             </div>
@@ -330,18 +341,14 @@ export default function HomePage() {
                   asChild
                 >
                   <a 
-                    href="#contacto" 
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setMobileMenuOpen(false)
-                      scrollToSection('contacto', 100)
-                    }}
+                    href={`tel:+${PHONE_PRIMARY}`}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
-                    Contacto
+                    Llamar Ahora
                   </a>
                 </Button>
               </div>
-            </nav>
+          </nav>
           </div>
         </div>
       </header>
@@ -356,7 +363,7 @@ export default function HomePage() {
               <Heart className="mr-2 h-4 w-4 animate-scale-pulse" />
               Cuidando mascotas desde 1997
             </div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-balance md:text-5xl lg:text-6xl bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-balance md:text-5xl lg:text-6xl gradient-title">
               {"Clínica Veterinaria 24 Horas en Bogotá"}
             </h1>
             <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
@@ -371,7 +378,7 @@ export default function HomePage() {
                 asChild
               >
                 <a href={`https://wa.me/${PHONE_PRIMARY}`} target="_blank" rel="noopener noreferrer">
-                  <Phone className="mr-2 h-5 w-5" />
+                <Phone className="mr-2 h-5 w-5" />
                   {PHONE_PRIMARY_DISPLAY}
                 </a>
               </Button>
@@ -382,7 +389,7 @@ export default function HomePage() {
                 asChild
               >
                 <a href={`https://wa.me/${PHONE_SECONDARY}`} target="_blank" rel="noopener noreferrer">
-                  <Phone className="mr-2 h-5 w-5" />
+                <Phone className="mr-2 h-5 w-5" />
                   {PHONE_SECONDARY_DISPLAY}
                 </a>
               </Button>
@@ -419,7 +426,7 @@ export default function HomePage() {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-4 mb-12 animate-in fade-in slide-in-from-bottom duration-700">
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-balance bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Servicios Especializados"}</h2>
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-balance gradient-title">{"Servicios Especializados"}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
               {"Atención médica completa para mascotas con tecnología de avanzada"}
             </p>
@@ -549,7 +556,7 @@ export default function HomePage() {
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
             </div>
             <div className="space-y-6 order-1 lg:order-2 animate-in fade-in slide-in-from-right duration-700 delay-200">
-              <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-balance bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent text-center">
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-balance gradient-title text-center">
                 {"¿Por qué elegir CLINIDOG?"}
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -612,7 +619,7 @@ export default function HomePage() {
               <Clock className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium text-primary">{"Disponibilidad 24/7"}</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 gradient-title">
               {"Estamos para Ayudarte"}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -629,7 +636,7 @@ export default function HomePage() {
                     <Clock className="h-6 w-6 md:h-7 md:w-7 text-primary-foreground" />
                   </div>
                   <div className="text-center md:text-left">
-                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Horarios"}</h3>
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold gradient-title">{"Horarios"}</h3>
                     <p className="text-xs md:text-sm text-muted-foreground mt-1">{"Atención continua"}</p>
                   </div>
                 </div>
@@ -649,20 +656,20 @@ export default function HomePage() {
                         </div>
                       </div>
                     </div>
-                  </div>
+              </div>
                   
                   <div className="rounded-xl bg-muted/50 p-4 md:p-6 border border-border">
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4 text-center md:text-left">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
                         <Heart className="h-5 w-5 text-accent" />
-                      </div>
+                </div>
                       <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                        {
+                    {
                           "Atención ininterrumpida las 24 horas del día, los 365 días del año. Siempre disponibles para cuidar de tu mascota con el amor y profesionalismo que merece."
-                        }
-                      </p>
-                    </div>
-                  </div>
+                    }
+                  </p>
+                </div>
+              </div>
 
                   <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 pt-4 border-t border-border">
                     <div className="flex -space-x-2">
@@ -688,7 +695,7 @@ export default function HomePage() {
                       <MapPin className="h-7 w-7 text-accent-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Nuestra Ubicación"}</h3>
+                      <h3 className="text-2xl md:text-3xl font-bold gradient-title">{"Nuestra Ubicación"}</h3>
                       <p className="text-sm text-muted-foreground mt-1">{"Puente Largo, Bogotá"}</p>
                     </div>
                   </div>
@@ -738,7 +745,7 @@ export default function HomePage() {
                   <Phone className="h-6 w-6 md:h-7 md:w-7 text-accent-foreground" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Teléfonos"}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold gradient-title">{"Teléfonos"}</h3>
                   <p className="text-xs md:text-sm text-muted-foreground mt-1">{"Contáctanos por WhatsApp"}</p>
                 </div>
               </div>
@@ -802,9 +809,9 @@ export default function HomePage() {
               <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
                 <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:scale-110 transition-transform shrink-0">
                   <MapPin className="h-6 w-6 md:h-7 md:w-7 text-primary-foreground" />
-                </div>
+                  </div>
                 <div className="min-w-0">
-                  <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Dirección"}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold gradient-title">{"Dirección"}</h3>
                   <p className="text-xs md:text-sm text-muted-foreground mt-1">{"Visítanos en nuestra clínica"}</p>
                 </div>
               </div>
@@ -821,16 +828,16 @@ export default function HomePage() {
                       <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary mt-1 shrink-0 group-hover/item:text-accent transition-colors" />
                       <div className="min-w-0">
                         <span className="block font-semibold text-sm md:text-base text-foreground group-hover/item:text-primary transition-colors mb-1 break-words">
-                          {"Transversal 54 # 103B - 78"}
+                      {"Transversal 54 # 103B - 78"}
                         </span>
                         <span className="block text-sm md:text-base text-foreground/80 group-hover/item:text-foreground transition-colors mb-1">
-                          {"Puente Largo, Bogotá"}
+                      {"Puente Largo, Bogotá"}
                         </span>
                         <span className="block text-xs md:text-sm text-muted-foreground group-hover/item:text-foreground/60 transition-colors">
-                          {"Colombia"}
+                      {"Colombia"}
                         </span>
                       </div>
-                    </div>
+                  </div>
                   </a>
                 </div>
 
@@ -842,13 +849,13 @@ export default function HomePage() {
                     <div className="min-w-0">
                       <h4 className="font-semibold text-base md:text-lg mb-2 text-foreground">{"Zonas de Servicio"}</h4>
                       <p className="text-xs md:text-sm leading-relaxed text-muted-foreground break-words">
-                        {
-                          "Puente Largo, Pasadena, Ilarco, Niza, Rio Negro, Pontevedra, Alhambra, Morato y Lagos de Córdoba"
-                        }
-                      </p>
-                    </div>
+                      {
+                        "Puente Largo, Pasadena, Ilarco, Niza, Rio Negro, Pontevedra, Alhambra, Morato y Lagos de Córdoba"
+                      }
+                    </p>
                   </div>
                 </div>
+              </div>
               </div>
             </Card>
           </div>
@@ -865,7 +872,7 @@ export default function HomePage() {
             {/* Google Business Info */}
             <div className="text-center mb-12">
               <div className="flex items-center justify-center gap-2 mb-2">
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"VETERINARIA CLINIDOG"}</h2>
+                <h2 className="text-2xl font-bold gradient-title">{"VETERINARIA CLINIDOG"}</h2>
               </div>
               <p className="text-muted-foreground mb-2">{"Tv. 56 #104a-21, Bogotá, Colombia"}</p>
               <div className="flex items-center justify-center gap-2">
@@ -1008,7 +1015,7 @@ export default function HomePage() {
                   className="h-10 w-10 object-contain"
                   quality={85}
                 />
-                <span className="font-bold text-xl bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"CLINIDOG"}</span>
+                <span className="font-bold text-xl gradient-title">{"CLINIDOG"}</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {
@@ -1139,7 +1146,7 @@ export default function HomePage() {
           {/* Bottom Section */}
           <div className="border-t pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-muted-foreground text-center">
+            <p className="text-sm text-muted-foreground text-center">
                 {"© 2026 VETERINARIA CLINIDOG BOGOTÁ. Todos los derechos reservados."}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm">

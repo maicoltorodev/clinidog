@@ -35,7 +35,7 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
                 />
               </div>
               <div>
-                <span className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent block">
+                <span className="text-xl md:text-2xl font-extrabold gradient-title block">
                   {"CLINIDOG"}
                 </span>
                 <span className="text-xs text-muted-foreground hidden sm:block">{"Veterinaria 24/7"}</span>
@@ -106,26 +106,33 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
               </Link>
             </nav>
 
-            {/* CTA Button Desktop */}
+            {/* CTA Button Desktop - WhatsApp */}
             <div className="hidden lg:flex items-center gap-3">
               <Button 
                 size="lg"
                 className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold px-8 py-6 text-lg" 
                 asChild
               >
-                <Link 
-                  href="/#contacto"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    window.location.href = '/#contacto'
-                    setTimeout(() => {
-                      const element = document.getElementById('contacto')
-                      element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                    }, 100)
-                  }}
+                <a 
+                  href="https://wa.me/573123015259"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Contacto
-                </Link>
+                  Llamar Ahora
+                </a>
+              </Button>
+            </div>
+
+            {/* CTA Button Mobile - Llamada directa */}
+            <div className="lg:hidden">
+              <Button 
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold px-6 py-5 text-base" 
+                asChild
+              >
+                <a href="tel:+573123015259">
+                  Llamar Ahora
+                </a>
               </Button>
             </div>
 
@@ -183,9 +190,12 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
                   asChild
                 >
-                  <Link href="/#contacto" onClick={() => setMobileMenuOpen(false)}>
-                    Contacto
-                  </Link>
+                  <a 
+                    href="tel:+573123015259"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Llamar Ahora
+                  </a>
                 </Button>
               </div>
             </nav>
@@ -267,7 +277,7 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
                   className="h-10 w-10 object-contain"
                   quality={85}
                 />
-                <span className="font-bold text-xl bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"CLINIDOG"}</span>
+                <span className="font-bold text-xl gradient-title">{"CLINIDOG"}</span>
               </Link>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {
