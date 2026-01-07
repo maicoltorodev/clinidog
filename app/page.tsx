@@ -879,33 +879,33 @@ export default function HomePage() {
                   style={{ transform: `translateX(-${currentReview * 100}%)` }}
                 >
                   {reviews.map((review, index) => (
-                    <div key={index} className="min-w-full px-4">
-                      <Card className="p-8 bg-card shadow-xl border border-primary/10 hover:shadow-2xl transition-all duration-300">
-                        <div className="space-y-4">
+                    <div key={index} className="min-w-full px-2 md:px-4">
+                      <Card className="p-4 md:p-6 lg:p-8 bg-card shadow-xl border border-primary/10 hover:shadow-2xl transition-all duration-300">
+                        <div className="space-y-3 md:space-y-4">
                           {/* Review Header */}
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-bold text-lg">{review.author}</h3>
+                          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-wrap items-center gap-2 mb-2">
+                                <h3 className="font-bold text-base md:text-lg break-words">{review.author}</h3>
                                 {review.role && (
-                                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
+                                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded whitespace-nowrap shrink-0">
                                     {review.role}
                                   </span>
                                 )}
                               </div>
-                              <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                                <span>{review.reviews}</span>
-                                <span>•</span>
-                                <span>{review.photos}</span>
-                                <span>•</span>
-                                <span>{review.time}</span>
+                              <div className="flex flex-wrap items-center gap-2 md:gap-3 text-xs text-muted-foreground">
+                                <span className="whitespace-nowrap">{review.reviews}</span>
+                                <span className="hidden sm:inline">•</span>
+                                <span className="whitespace-nowrap">{review.photos}</span>
+                                <span className="hidden sm:inline">•</span>
+                                <span className="whitespace-nowrap">{review.time}</span>
                               </div>
                             </div>
-                            <div className="flex gap-1">
+                            <div className="flex gap-1 shrink-0 self-start sm:self-auto">
                               {[...Array(5)].map((_, i) => (
                                 <Star
                                   key={i}
-                                  className={`h-5 w-5 ${
+                                  className={`h-4 w-4 md:h-5 md:w-5 ${
                                     i < review.rating
                                       ? "fill-yellow-400 text-yellow-400"
                                       : "fill-gray-200 text-gray-200"
@@ -916,15 +916,15 @@ export default function HomePage() {
                           </div>
 
                           {/* Review Text */}
-                          <p className="text-muted-foreground leading-relaxed text-base">
+                          <p className="text-sm md:text-base text-muted-foreground leading-relaxed break-words">
                             {review.text}
                           </p>
 
                           {/* Google Badge */}
-                          <div className="pt-4 border-t">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <div className="pt-3 md:pt-4 border-t">
+                            <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
                               <svg
-                                className="h-5 w-5"
+                                className="h-4 w-4 md:h-5 md:w-5 shrink-0"
                                 viewBox="0 0 24 24"
                                 fill="currentColor"
                               >
@@ -933,7 +933,7 @@ export default function HomePage() {
                                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                               </svg>
-                              <span>{"Opinión verificada de Google"}</span>
+                              <span className="break-words">{"Opinión verificada de Google"}</span>
                             </div>
                           </div>
                         </div>
@@ -948,17 +948,17 @@ export default function HomePage() {
                 onClick={() =>
                   setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
                 }
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-background border rounded-full p-2 shadow-lg hover:bg-accent transition-colors z-10"
+                className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 bg-background border rounded-full p-2 md:p-2 shadow-lg hover:bg-accent transition-colors z-10"
                 aria-label="Comentario anterior"
               >
-                <ChevronLeft className="h-6 w-6" />
+                <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
               </button>
               <button
                 onClick={() => setCurrentReview((prev) => (prev + 1) % reviews.length)}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-background border rounded-full p-2 shadow-lg hover:bg-accent transition-colors z-10"
+                className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 bg-background border rounded-full p-2 md:p-2 shadow-lg hover:bg-accent transition-colors z-10"
                 aria-label="Siguiente comentario"
               >
-                <ChevronRight className="h-6 w-6" />
+                <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
               </button>
 
               {/* Dots Indicator */}
