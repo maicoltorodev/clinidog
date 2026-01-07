@@ -389,21 +389,21 @@ export default function HomePage() {
             </div>
           </div>
           <div className="relative animate-in fade-in slide-in-from-right duration-700 delay-200">
-            <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 animate-float relative shadow-2xl">
-              <div className="absolute inset-0 shine-effect opacity-0 hover:opacity-100 transition-opacity duration-300" />
+            <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 animate-float relative shadow-2xl z-0">
+              <div className="absolute inset-0 shine-effect opacity-0 hover:opacity-100 transition-opacity duration-300 z-10" />
               <Image 
                 src="/title-image.png" 
                 alt="Veterinario con mascota" 
                 fill
-                className="object-cover relative z-10"
+                className="object-cover relative z-0"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 quality={85}
                 priority
               />
             </div>
-            <div className="absolute -bottom-6 -right-6 gradient-accent text-accent-foreground rounded-2xl p-6 shadow-2xl max-w-[200px] animate-pulse-glow animate-in fade-in zoom-in duration-500 delay-500 border-2 border-white/20 backdrop-blur-sm">
-              <div className="text-3xl font-bold drop-shadow-lg">{"27+"}</div>
-              <div className="text-sm font-medium">{"Años de experiencia cuidando a tus mascotas"}</div>
+            <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 gradient-accent text-accent-foreground rounded-2xl p-4 md:p-6 shadow-2xl max-w-[180px] md:max-w-[200px] animate-pulse-glow animate-in fade-in zoom-in duration-500 delay-500 border-2 border-white/20 backdrop-blur-sm z-30">
+              <div className="text-2xl md:text-3xl font-bold drop-shadow-lg">{"27+"}</div>
+              <div className="text-xs md:text-sm font-medium">{"Años de experiencia cuidando a tus mascotas"}</div>
             </div>
             {/* Floating decorative elements */}
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-pulse" />
