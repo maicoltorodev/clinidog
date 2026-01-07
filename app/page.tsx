@@ -732,18 +732,18 @@ export default function HomePage() {
           {/* Contacto Section - Full Width */}
           <div id="contacto" className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom duration-700 delay-400">
             {/* Teléfonos Card */}
-            <Card className="bg-card border-2 border-primary/10 shadow-xl p-8 hover:shadow-primary/20 hover:border-primary/20 transition-all duration-500 group">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent/80 shadow-lg group-hover:scale-110 transition-transform">
-                  <Phone className="h-7 w-7 text-accent-foreground" />
+            <Card className="bg-card border-2 border-primary/10 shadow-xl p-4 md:p-8 hover:shadow-primary/20 hover:border-primary/20 transition-all duration-500 group">
+              <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent/80 shadow-lg group-hover:scale-110 transition-transform shrink-0">
+                  <Phone className="h-6 w-6 md:h-7 md:w-7 text-accent-foreground" />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Teléfonos"}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{"Contáctanos por WhatsApp"}</p>
+                <div className="min-w-0">
+                  <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Teléfonos"}</h3>
+                  <p className="text-xs md:text-sm text-muted-foreground mt-1">{"Contáctanos por WhatsApp"}</p>
                 </div>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-3 md:space-y-4">
                 {[
                   { phone: PHONE_PRIMARY, display: PHONE_PRIMARY_DISPLAY, label: "Línea principal" },
                   { phone: PHONE_SECONDARY, display: PHONE_SECONDARY_DISPLAY, label: "Línea alternativa" }
@@ -753,30 +753,30 @@ export default function HomePage() {
                     href={`https://wa.me/${item.phone}`}
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 border border-primary/10 transition-all group/item"
+                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 p-3 md:p-4 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 border border-primary/10 transition-all group/item"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover/item:bg-primary/20 transition-colors">
-                        <WhatsAppIcon className="h-6 w-6 text-primary" />
+                    <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
+                      <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-lg bg-primary/10 group-hover/item:bg-primary/20 transition-colors shrink-0">
+                        <WhatsAppIcon className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                       </div>
-                      <div>
-                        <span className="block font-bold text-xl text-foreground">{item.display}</span>
-                        <span className="block text-sm text-muted-foreground">{item.label}</span>
+                      <div className="min-w-0 flex-1">
+                        <span className="block font-bold text-lg md:text-xl text-foreground break-all">{item.display}</span>
+                        <span className="block text-xs md:text-sm text-muted-foreground">{item.label}</span>
                       </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full bg-accent/20 text-xs font-medium text-accent">{"WhatsApp"}</span>
+                    <span className="px-2 py-1 md:px-3 md:py-1 rounded-full bg-accent/20 text-xs font-medium text-accent whitespace-nowrap shrink-0 self-start sm:self-auto">{"WhatsApp"}</span>
                   </a>
                 ))}
               </div>
               
-              <div className="mt-6 pt-6 border-t border-border">
+              <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-border">
                 <Button
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 font-bold py-6"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 font-bold py-4 md:py-6 text-sm md:text-base"
                   size="lg"
                   asChild
                 >
                   <a href={`https://wa.me/${PHONE_PRIMARY}`} target="_blank" rel="noopener noreferrer">
-                    <Phone className="mr-2 h-5 w-5" />
+                    <Phone className="mr-2 h-4 w-4 md:h-5 md:w-5" />
                     Llamar Ahora
                   </a>
                 </Button>
@@ -784,19 +784,19 @@ export default function HomePage() {
             </Card>
 
             {/* Dirección y Zonas Card */}
-            <Card className="bg-card border-2 border-primary/10 shadow-xl p-8 hover:shadow-primary/20 hover:border-primary/20 transition-all duration-500 group">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:scale-110 transition-transform">
-                  <MapPin className="h-7 w-7 text-primary-foreground" />
+            <Card className="bg-card border-2 border-primary/10 shadow-xl p-4 md:p-8 hover:shadow-primary/20 hover:border-primary/20 transition-all duration-500 group">
+              <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:scale-110 transition-transform shrink-0">
+                  <MapPin className="h-6 w-6 md:h-7 md:w-7 text-primary-foreground" />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Dirección"}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{"Visítanos en nuestra clínica"}</p>
+                <div className="min-w-0">
+                  <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Dirección"}</h3>
+                  <p className="text-xs md:text-sm text-muted-foreground mt-1">{"Visítanos en nuestra clínica"}</p>
                 </div>
               </div>
               
-              <div className="space-y-6">
-                <div className="p-5 rounded-xl bg-muted/50 border border-border">
+              <div className="space-y-4 md:space-y-6">
+                <div className="p-4 md:p-5 rounded-xl bg-muted/50 border border-border">
                   <a
                     href={MAPS_URL}
                     target="_blank"
@@ -804,15 +804,15 @@ export default function HomePage() {
                     className="block group/item"
                   >
                     <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-primary mt-1 shrink-0 group-hover/item:text-accent transition-colors" />
-                      <div>
-                        <span className="block font-semibold text-foreground group-hover/item:text-primary transition-colors mb-1">
+                      <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary mt-1 shrink-0 group-hover/item:text-accent transition-colors" />
+                      <div className="min-w-0">
+                        <span className="block font-semibold text-sm md:text-base text-foreground group-hover/item:text-primary transition-colors mb-1 break-words">
                           {"Transversal 54 # 103B - 78"}
                         </span>
-                        <span className="block text-foreground/80 group-hover/item:text-foreground transition-colors mb-1">
+                        <span className="block text-sm md:text-base text-foreground/80 group-hover/item:text-foreground transition-colors mb-1">
                           {"Puente Largo, Bogotá"}
                         </span>
-                        <span className="block text-sm text-muted-foreground group-hover/item:text-foreground/60 transition-colors">
+                        <span className="block text-xs md:text-sm text-muted-foreground group-hover/item:text-foreground/60 transition-colors">
                           {"Colombia"}
                         </span>
                       </div>
@@ -820,14 +820,14 @@ export default function HomePage() {
                   </a>
                 </div>
 
-                <div className="p-5 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10">
+                <div className="p-4 md:p-5 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/10">
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <MapPin className="h-5 w-5 text-primary" />
+                    <div className="flex h-8 w-8 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2 text-foreground">{"Zonas de Servicio"}</h4>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
+                    <div className="min-w-0">
+                      <h4 className="font-semibold text-base md:text-lg mb-2 text-foreground">{"Zonas de Servicio"}</h4>
+                      <p className="text-xs md:text-sm leading-relaxed text-muted-foreground break-words">
                         {
                           "Puente Largo, Pasadena, Ilarco, Niza, Rio Negro, Pontevedra, Alhambra, Morato y Lagos de Córdoba"
                         }
