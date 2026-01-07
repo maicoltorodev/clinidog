@@ -775,6 +775,20 @@ export default function HomePage() {
                   size="lg"
                   asChild
                 >
+                  {/* En móvil: tel: para llamar directamente, en desktop: WhatsApp */}
+                  <a 
+                    href={`tel:+${PHONE_PRIMARY}`}
+                    className="md:hidden"
+                  >
+                    <Phone className="mr-2 h-4 w-4 md:h-5 md:w-5" />
+                    Llamar Ahora
+                  </a>
+                </Button>
+                <Button
+                  className="hidden md:flex w-full bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 font-bold py-4 md:py-6 text-sm md:text-base"
+                  size="lg"
+                  asChild
+                >
                   <a href={`https://wa.me/${PHONE_PRIMARY}`} target="_blank" rel="noopener noreferrer">
                     <Phone className="mr-2 h-4 w-4 md:h-5 md:w-5" />
                     Llamar Ahora
@@ -943,22 +957,22 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Navigation Buttons */}
+              {/* Navigation Buttons - Ocultas en móvil */}
               <button
                 onClick={() =>
                   setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
                 }
-                className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 bg-background border rounded-full p-2 md:p-2 shadow-lg hover:bg-accent transition-colors z-10"
+                className="hidden md:flex absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 bg-background border rounded-full p-2 shadow-lg hover:bg-accent transition-colors z-10 items-center justify-center"
                 aria-label="Comentario anterior"
               >
-                <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+                <ChevronLeft className="h-6 w-6" />
               </button>
               <button
                 onClick={() => setCurrentReview((prev) => (prev + 1) % reviews.length)}
-                className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 bg-background border rounded-full p-2 md:p-2 shadow-lg hover:bg-accent transition-colors z-10"
+                className="hidden md:flex absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 bg-background border rounded-full p-2 shadow-lg hover:bg-accent transition-colors z-10 items-center justify-center"
                 aria-label="Siguiente comentario"
               >
-                <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+                <ChevronRight className="h-6 w-6" />
               </button>
 
               {/* Dots Indicator */}
