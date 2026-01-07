@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CLINIDOG - Clínica Veterinaria Profesional",
     description:
-      "Clínica veterinaria profesional dedicada al cuidado integral de tus mascotas. Servicios de consulta, vacunación, cirugía y emergencias 24/7 en Bogotá.",
+      "Clínica veterinaria profesional dedicada al cuidado integral de tus mascotas 24/7.",
     url: "https://clinidog.com",
     siteName: "CLINIDOG",
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CLINIDOG - Clínica Veterinaria Profesional",
     description:
-      "Clínica veterinaria profesional dedicada al cuidado integral de tus mascotas. Servicios de consulta, vacunación, cirugía y emergencias 24/7 en Bogotá.",
+    "Clínica veterinaria profesional dedicada al cuidado integral de tus mascotas 24/7.",
     images: ["/imagen-meta-data.jpg"],
   },
 }
