@@ -549,7 +549,7 @@ export default function HomePage() {
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
             </div>
             <div className="space-y-6 order-1 lg:order-2 animate-in fade-in slide-in-from-right duration-700 delay-200">
-              <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-balance bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+              <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-balance bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent text-center">
                 {"¿Por qué elegir CLINIDOG?"}
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -623,40 +623,40 @@ export default function HomePage() {
           <div className="grid gap-6 md:grid-cols-12 lg:gap-8 max-w-7xl mx-auto mb-12">
             {/* Horarios Card */}
             <div className="md:col-span-5 animate-in fade-in slide-in-from-left duration-700">
-              <Card className="bg-card border-2 border-primary/10 shadow-2xl p-8 md:p-10 h-full hover:shadow-primary/20 hover:border-primary/20 transition-all duration-500 group">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:scale-110 transition-transform">
-                    <Clock className="h-7 w-7 text-primary-foreground" />
+              <Card className="bg-card border-2 border-primary/10 shadow-2xl p-6 md:p-8 lg:p-10 h-full hover:shadow-primary/20 hover:border-primary/20 transition-all duration-500 group">
+                <div className="flex items-center justify-center md:justify-start gap-3 md:gap-4 mb-6 md:mb-8">
+                  <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 shadow-lg group-hover:scale-110 transition-transform">
+                    <Clock className="h-6 w-6 md:h-7 md:w-7 text-primary-foreground" />
                   </div>
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Horarios"}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{"Atención continua"}</p>
+                  <div className="text-center md:text-left">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"Horarios"}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground mt-1">{"Atención continua"}</p>
                   </div>
                 </div>
                 
-                <div className="space-y-6">
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-accent/5 p-6 border border-primary/20">
+                <div className="space-y-4 md:space-y-6">
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-accent/5 p-5 md:p-6 border border-primary/20">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
                     <div className="relative">
-                      <div className="flex flex-col gap-4 mb-4">
-                        <div>
-                          <span className="font-semibold text-2xl block mb-2 text-foreground">{"Todos los días"}</span>
-                          <span className="text-sm text-muted-foreground">{"Durante todo el año"}</span>
+                      <div className="flex flex-col items-center md:items-start gap-3 md:gap-4">
+                        <div className="text-center md:text-left">
+                          <span className="font-semibold text-xl md:text-2xl block mb-2 text-foreground">{"Todos los días"}</span>
+                          <span className="text-xs md:text-sm text-muted-foreground">{"Durante todo el año"}</span>
                         </div>
-                        <div className="inline-flex items-center gap-2 bg-accent px-5 py-3 rounded-full shadow-lg w-fit">
+                        <div className="inline-flex items-center gap-2 bg-accent px-4 md:px-5 py-2 md:py-3 rounded-full shadow-lg">
                           <div className="w-2 h-2 bg-accent-foreground rounded-full animate-pulse" />
-                          <span className="text-base font-bold text-accent-foreground">{"24 HORAS"}</span>
+                          <span className="text-sm md:text-base font-bold text-accent-foreground">{"24 HORAS"}</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="rounded-xl bg-muted/50 p-6 border border-border">
-                    <div className="flex items-start gap-4">
+                  <div className="rounded-xl bg-muted/50 p-4 md:p-6 border border-border">
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4 text-center md:text-left">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
                         <Heart className="h-5 w-5 text-accent" />
                       </div>
-                      <p className="text-muted-foreground leading-relaxed pt-1">
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                         {
                           "Atención ininterrumpida las 24 horas del día, los 365 días del año. Siempre disponibles para cuidar de tu mascota con el amor y profesionalismo que merece."
                         }
@@ -664,13 +664,13 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 pt-4 border-t border-border">
+                  <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 pt-4 border-t border-border">
                     <div className="flex -space-x-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/70 border-2 border-background shadow-md" />
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent/70 border-2 border-background shadow-md" />
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background shadow-md" />
                     </div>
-                    <div>
+                    <div className="text-center md:text-left">
                       <span className="block text-sm font-semibold text-foreground">{"Equipo disponible 24/7"}</span>
                       <span className="block text-xs text-muted-foreground">{"Veterinarios especializados"}</span>
                     </div>
