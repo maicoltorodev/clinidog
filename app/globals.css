@@ -122,6 +122,10 @@
   }
   html {
     scroll-behavior: smooth;
+    /* Optimización de rendimiento */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   body {
     @apply bg-background text-foreground;
@@ -196,6 +200,31 @@
     .hover-element.viewport-active {
       /* Los efectos hover se activan automáticamente en móvil */
     }
+    
+    /* Reducir animaciones pesadas en móvil para mejor rendimiento */
+    .animate-float {
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .animate-pulse-glow {
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+    
+    /* Desactivar efectos costosos en móvil */
+    .shine-effect {
+      animation: none;
+    }
+    
+    /* Reducir backdrop-blur en móvil */
+    .glass {
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+    
+    /* Optimizar transiciones en móvil */
+    * {
+      will-change: auto;
+    }
   }
 
   /* Gradientes modernos */
@@ -221,6 +250,16 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Optimización para móvil: reducir blur en dispositivos lentos */
+  @media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+    @supports (backdrop-filter: blur(5px)) {
+      .glass {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+      }
+    }
   }
 
   /* Card hover effects mejorados */

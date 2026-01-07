@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import {
@@ -92,36 +93,78 @@ export default function HomePage() {
   ]
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentReview((prev) => (prev + 1) % 5)
-    }, 5000) // Cambia cada 5 segundos
-
-    return () => clearInterval(interval)
+    // Pausar el carrusel cuando la pestaña no está visible (Page Visibility API)
+    let interval: NodeJS.Timeout | null = null
+    
+    const startInterval = () => {
+      interval = setInterval(() => {
+        setCurrentReview((prev) => (prev + 1) % 5)
+      }, 5000)
+    }
+    
+    const stopInterval = () => {
+      if (interval) {
+        clearInterval(interval)
+        interval = null
+      }
+    }
+    
+    // Iniciar intervalo
+    startInterval()
+    
+    // Pausar cuando la pestaña no está visible para ahorrar recursos
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopInterval()
+      } else {
+        startInterval()
+      }
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    
+    return () => {
+      stopInterval()
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [])
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches
+    // Solo ejecutar en cliente
+    if (typeof window === 'undefined') return
 
-    if (!isMobile) return
+    const mediaQuery = window.matchMedia("(max-width: 768px)")
+    
+    if (!mediaQuery.matches) return
 
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            entry.target.classList.add("viewport-active")
-          } else {
-            entry.target.classList.remove("viewport-active")
-          }
-        })
-      },
-      {
-        threshold: [0.5], // Activar cuando el 50% del elemento es visible
-        rootMargin: "-20% 0px -20% 0px", // Detectar cuando está más cerca del centro
-      },
-    )
+    // Usar requestIdleCallback para mejor rendimiento en móvil
+    const setupObserver = () => {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+              entry.target.classList.add("viewport-active")
+            } else {
+              entry.target.classList.remove("viewport-active")
+            }
+          })
+        },
+        {
+          threshold: [0.5],
+          rootMargin: "-20% 0px -20% 0px",
+        },
+      )
 
-    const elements = document.querySelectorAll(".hover-element")
-    elements.forEach((el) => observerRef.current?.observe(el))
+      const elements = document.querySelectorAll(".hover-element")
+      elements.forEach((el) => observerRef.current?.observe(el))
+    }
+
+    // Defer observer setup para no bloquear el render inicial
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(setupObserver, { timeout: 2000 })
+    } else {
+      setTimeout(setupObserver, 100)
+    }
 
     return () => {
       observerRef.current?.disconnect()
@@ -138,10 +181,14 @@ export default function HomePage() {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-colors" />
-                <img 
+                <Image 
                   src="/logo.png" 
                   alt="CLINIDOG Logo" 
-                  className="relative h-12 w-12 md:h-14 md:w-14 object-contain transition-transform group-hover:scale-105" 
+                  width={56}
+                  height={56}
+                  className="relative h-12 w-12 md:h-14 md:w-14 object-contain transition-transform group-hover:scale-105"
+                  priority
+                  quality={85}
                 />
               </div>
               <div>
@@ -378,7 +425,15 @@ export default function HomePage() {
           <div className="relative animate-in fade-in slide-in-from-right duration-700 delay-200">
             <div className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 animate-float relative shadow-2xl">
               <div className="absolute inset-0 shine-effect opacity-0 hover:opacity-100 transition-opacity duration-300" />
-              <img src="/title-image.png" alt="Veterinario con mascota" className="h-full w-full object-cover relative z-10" />
+              <Image 
+                src="/title-image.png" 
+                alt="Veterinario con mascota" 
+                fill
+                className="object-cover relative z-10"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={85}
+                priority
+              />
             </div>
             <div className="absolute -bottom-6 -right-6 gradient-accent text-accent-foreground rounded-2xl p-6 shadow-2xl max-w-[200px] animate-pulse-glow animate-in fade-in zoom-in duration-500 delay-500 border-2 border-white/20 backdrop-blur-sm">
               <div className="text-3xl font-bold drop-shadow-lg">{"27+"}</div>
@@ -511,10 +566,14 @@ export default function HomePage() {
             <div className="relative order-2 lg:order-1 animate-in fade-in slide-in-from-left duration-700 hover-element hover:scale-105 viewport-active:scale-105 transition-transform duration-500">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 shadow-2xl relative">
                 <div className="absolute inset-0 shine-effect opacity-0 hover:opacity-100 transition-opacity duration-500" />
-                <img
+                <Image
                   src="/clinica.png"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={85}
+                  loading="lazy"
                   alt="Clínica moderna"
-                  className="h-full w-full object-cover relative z-10"
+                  className="object-cover relative z-10"
                 />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent z-20" />
@@ -680,6 +739,7 @@ export default function HomePage() {
                 
                 <div className="flex-1 flex flex-col rounded-xl overflow-hidden border-2 border-border shadow-inner bg-muted/30">
                   <iframe
+                    loading="lazy"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.4422314636786!2d-74.06573622418668!3d4.692962141722866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9adadf936d11%3A0x6f30c3932148ba2d!2sVETERINARIA%20CLINIDOG!5e0!3m2!1ses-419!2sco!4v1767744558861!5m2!1ses-419!2sco"
                     width="100%"
                     height="100%"
@@ -973,7 +1033,14 @@ export default function HomePage() {
             {/* About Section */}
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-4">
-                <img src="/logo.png" alt="CLINIDOG Logo" className="h-10 w-10 object-contain" />
+                <Image 
+                  src="/logo.png" 
+                  alt="CLINIDOG Logo" 
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 object-contain"
+                  quality={85}
+                />
                 <span className="font-bold text-xl bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"CLINIDOG"}</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">

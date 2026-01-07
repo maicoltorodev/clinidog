@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Phone, ArrowLeft, Clock, MapPin, Menu, X } from "lucide-react"
 import type { ReactNode } from "react"
@@ -23,10 +24,14 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-colors" />
-                <img 
+                <Image 
                   src="/logo.png" 
                   alt="CLINIDOG Logo" 
-                  className="relative h-12 w-12 md:h-14 md:w-14 object-contain transition-transform group-hover:scale-105" 
+                  width={56}
+                  height={56}
+                  className="relative h-12 w-12 md:h-14 md:w-14 object-contain transition-transform group-hover:scale-105"
+                  priority
+                  quality={85}
                 />
               </div>
               <div>
@@ -254,7 +259,14 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
             {/* About Section */}
             <div className="space-y-4">
               <Link href="/" className="flex items-center gap-3 mb-4">
-                <img src="/logo.png" alt="CLINIDOG Logo" className="h-10 w-10 object-contain" />
+                <Image 
+                  src="/logo.png" 
+                  alt="CLINIDOG Logo" 
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 object-contain"
+                  quality={85}
+                />
                 <span className="font-bold text-xl bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">{"CLINIDOG"}</span>
               </Link>
               <p className="text-sm text-muted-foreground leading-relaxed">
