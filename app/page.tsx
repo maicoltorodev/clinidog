@@ -137,18 +137,27 @@ export default function HomePage() {
     
     if (!mediaQuery.matches) return
 
+    // Función throttle usando requestAnimationFrame para mejor rendimiento
+    let rafId: number | null = null
+    const throttledObserver = (entries: IntersectionObserverEntry[]) => {
+      if (rafId !== null) return
+      
+      rafId = requestAnimationFrame(() => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            entry.target.classList.add("viewport-active")
+          } else {
+            entry.target.classList.remove("viewport-active")
+          }
+        })
+        rafId = null
+      })
+    }
+
     // Usar requestIdleCallback para mejor rendimiento en móvil
     const setupObserver = () => {
       observerRef.current = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-              entry.target.classList.add("viewport-active")
-            } else {
-              entry.target.classList.remove("viewport-active")
-            }
-          })
-        },
+        throttledObserver,
         {
           threshold: [0.5],
           rootMargin: "-20% 0px -20% 0px",
@@ -167,6 +176,9 @@ export default function HomePage() {
     }
 
     return () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
       observerRef.current?.disconnect()
     }
   }, [])
@@ -539,14 +551,14 @@ export default function HomePage() {
                   className="p-6 card-hover bg-card h-full cursor-pointer group hover-element animate-in fade-in slide-in-from-bottom duration-500 border-gradient relative overflow-hidden"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  {/* Gradient overlay on hover */}
+                  {/* Gradient overlay on hover - solo desktop */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-accent/0 group-hover:from-primary/5 group-hover:via-primary/5 group-hover:to-accent/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
                   
                   <div className="flex flex-col gap-4 relative z-10">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20 group-[.viewport-active]:from-primary/20 group-[.viewport-active]:to-accent/20 transition-all group-hover:scale-110 group-hover:rotate-3 group-[.viewport-active]:scale-110 group-[.viewport-active]:rotate-3 duration-300 shadow-lg group-hover:shadow-xl">
-                      <service.icon className="h-7 w-7 text-primary group-hover:text-accent group-[.viewport-active]:text-accent transition-colors group-hover:animate-bounce-soft group-[.viewport-active]:animate-bounce-soft" />
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 group-hover:from-primary/20 group-hover:to-accent/20 transition-all group-hover:scale-110 group-hover:rotate-3 duration-300 shadow-lg group-hover:shadow-xl">
+                      <service.icon className="h-7 w-7 text-primary group-hover:text-accent transition-colors group-hover:animate-bounce-soft" />
                     </div>
-                    <h3 className="text-xl font-bold group-hover:text-primary group-[.viewport-active]:text-primary transition-colors">
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
                       {service.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors">{service.description}</p>

@@ -147,10 +147,10 @@
   @keyframes pulse-glow {
     0%,
     100% {
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      opacity: 0.7;
     }
     50% {
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+      opacity: 1;
     }
   }
 
@@ -192,7 +192,9 @@
 
   /* Agregando soporte para efectos viewport en móviles */
   .hover-element {
-    transition: all 0.3s ease;
+    /* Usar solo transform y opacity para mejor rendimiento */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    will-change: transform, opacity;
   }
 
   /* Efectos cuando el elemento está en el viewport activo (móvil) */
@@ -201,29 +203,96 @@
       /* Los efectos hover se activan automáticamente en móvil */
     }
     
-    /* Reducir animaciones pesadas en móvil para mejor rendimiento */
-    .animate-float {
-      animation: float 8s ease-in-out infinite;
-    }
-    
-    .animate-pulse-glow {
-      animation: pulse-glow 4s ease-in-out infinite;
+    /* Desactivar todas las animaciones pesadas en móvil */
+    .animate-float,
+    .animate-pulse-glow,
+    .animate-scale-pulse,
+    .animate-bounce-soft {
+      animation: none !important;
     }
     
     /* Desactivar efectos costosos en móvil */
     .shine-effect {
-      animation: none;
+      animation: none !important;
     }
     
-    /* Reducir backdrop-blur en móvil */
-    .glass {
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+    /* Eliminar backdrop-blur completamente en móvil para mejor rendimiento */
+    .glass,
+    .backdrop-blur-xl,
+    .backdrop-blur-sm {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
     }
     
-    /* Optimizar transiciones en móvil */
+    /* Limitar el número de elementos animados simultáneamente - desactivar slide-in */
+    .animate-in {
+      animation: none !important;
+    }
+    
+    /* Solo permitir fade-in simple en móvil usando opacity */
+    .animate-in.fade-in {
+      animation: fade-in-mobile 0.4s ease-out !important;
+      opacity: 0;
+    }
+    
+    .animate-in.fade-in[style*="animation-delay"] {
+      animation: fade-in-mobile 0.4s ease-out !important;
+      opacity: 1;
+    }
+    
+    /* Desactivar animaciones de sombras en móvil - usar solo opacity */
+    .shadow-lg,
+    .shadow-xl,
+    .shadow-2xl,
+    .shadow-md,
+    .shadow-inner {
+      box-shadow: none !important;
+    }
+    
+    /* Desactivar transformaciones complejas en hover en móvil */
+    .hover\:scale-105,
+    .hover\:scale-110,
+    .hover\:rotate-3,
+    .hover\:translate-x-2,
+    .hover\:shadow-xl {
+      transition: opacity 0.2s ease !important;
+    }
+    
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover,
+    .hover\:rotate-3:hover,
+    .hover\:translate-x-2:hover {
+      transform: none !important;
+    }
+    
+    /* Optimizar transiciones generales en móvil */
     * {
-      will-change: auto;
+      transition-property: opacity !important;
+      transition-duration: 0.2s !important;
+      transition-timing-function: ease !important;
+      will-change: auto !important;
+    }
+    
+    /* Permitir solo transform y opacity en hover elements */
+    .hover-element:hover,
+    .hover-element.viewport-active {
+      transition: opacity 0.2s ease !important;
+      transform: none !important;
+    }
+    
+    /* Desactivar filtros en móvil */
+    .drop-shadow-lg {
+      filter: none !important;
+    }
+  }
+  
+  /* Animación simple de fade-in para móvil usando solo opacity */
+  @keyframes fade-in-mobile {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 
@@ -262,14 +331,28 @@
     }
   }
 
-  /* Card hover effects mejorados */
+  /* Card hover effects mejorados - solo transform y opacity */
   .card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    will-change: transform;
   }
 
   .card-hover:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  }
+  
+  /* En móvil: solo borde, sin transform ni sombras */
+  @media (max-width: 768px) {
+    .card-hover {
+      transition: opacity 0.2s ease !important;
+      will-change: auto !important;
+    }
+    
+    .card-hover:hover,
+    .card-hover.viewport-active {
+      transform: none !important;
+      box-shadow: none !important;
+    }
   }
 
   /* Shine effect */
@@ -312,9 +395,34 @@
     mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.3s;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .border-gradient:hover::before {
     opacity: 1;
+  }
+
+  /* En móvil: solo mostrar borde degradado cuando viewport-active */
+  @media (max-width: 768px) {
+    .hover-element.viewport-active.border-gradient::before {
+      opacity: 1;
+    }
+    
+    /* Desactivar todas las animaciones pesadas en móvil para viewport-active */
+    .hover-element.viewport-active {
+      transform: none !important;
+    }
+    
+    .hover-element.viewport-active * {
+      animation: none !important;
+      transform: none !important;
+    }
+    
+    /* Mantener transiciones suaves pero sin animaciones complejas */
+    .hover-element.viewport-active .animate-bounce-soft,
+    .hover-element.viewport-active .animate-scale-pulse {
+      animation: none !important;
+    }
   }
 }
