@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
@@ -9,10 +9,6 @@ const _geist = Geist({
   display: "swap",
   preload: true,
   adjustFontFallback: true,
-})
-const _geistMono = Geist_Mono({ 
-  subsets: ["latin"],
-  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -75,7 +71,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
       </head>
-      <body className={`font-sans antialiased`}>
+      <body className={`${_geist.className} antialiased`}>
         {children}
         <Analytics />
       </body>

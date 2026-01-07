@@ -44,7 +44,7 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
-              <a
+              <Link
                 href="/#servicios"
                 onClick={(e) => {
                   e.preventDefault()
@@ -58,8 +58,8 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
               >
                 {"Servicios"}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#nosotros"
                 onClick={(e) => {
                   e.preventDefault()
@@ -73,8 +73,8 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
               >
                 {"Nosotros"}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#horarios"
                 onClick={(e) => {
                   e.preventDefault()
@@ -88,8 +88,8 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
               >
                 {"Horarios"}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#contacto"
                 onClick={(e) => {
                   e.preventDefault()
@@ -103,7 +103,7 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
               >
                 {"Contacto"}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-200" />
-              </a>
+              </Link>
             </nav>
 
             {/* CTA Button Desktop */}
@@ -113,7 +113,7 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
                 className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 font-semibold px-8 py-6 text-lg" 
                 asChild
               >
-                <a 
+                <Link 
                   href="/#contacto"
                   onClick={(e) => {
                     e.preventDefault()
@@ -125,7 +125,7 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
                   }}
                 >
                   Contacto
-                </a>
+                </Link>
               </Button>
             </div>
 
@@ -150,42 +150,42 @@ export function ServiceLayout({ children }: ServiceLayoutProps) {
             }`}
           >
             <nav className="py-4 space-y-2 border-t">
-              <a
+              <Link
                 href="/#servicios"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
               >
                 {"Servicios"}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#nosotros"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
               >
                 {"Nosotros"}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#horarios"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
               >
                 {"Horarios"}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/#contacto"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 rounded-lg text-base font-semibold text-foreground/70 hover:text-primary hover:bg-primary/5 transition-all"
               >
                 {"Contacto"}
-              </a>
+              </Link>
               <div className="pt-2 px-4">
                 <Button
                   className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
                   asChild
                 >
-                  <a href="/#contacto" onClick={() => setMobileMenuOpen(false)}>
+                  <Link href="/#contacto" onClick={() => setMobileMenuOpen(false)}>
                     Contacto
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </nav>
